@@ -11,7 +11,7 @@ export class AppController {
     @Query() { id, url, path, filter, type }: any,
   ): Promise<IAdapterResponse> {
     try {
-      let data = await this.appService.scrap(url, path);
+      let data = await this.appService.scrape(url, path);
 
       if (filter && data) {
         data = this.appService.filterContent(data['content'], filter);

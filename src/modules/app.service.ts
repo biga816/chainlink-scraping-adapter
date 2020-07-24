@@ -6,7 +6,7 @@ import got from 'got';
 
 @Injectable()
 export class AppService {
-  async scrap(url: string, path: string): Promise<any[]> {
+  async scrape(url: string, path: string): Promise<any[]> {
     const { body: data } = await got(url, {
       encoding: 'binary',
       responseType: 'buffer',

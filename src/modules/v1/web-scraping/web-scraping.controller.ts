@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { WebScrapingService } from './web-scraping.service';
-import { IAdapterResponse } from '@interfaces/adapter-response';
+import { IAdapterResponse, AdapterStatus } from '@interfaces/adapter-response';
 
 @Controller('web-scraping')
 export class WebScrapingController {
@@ -10,22 +10,31 @@ export class WebScrapingController {
   async get(
     @Query() { id, url, path, filter, type }: any,
   ): Promise<IAdapterResponse> {
-    let data = await this.webScrapingService.scrap(url, path);
+    try {
+      let data = await this.webScrapingService.scrap(url, path);
 
-    if (filter) {
-      data = this.webScrapingService.filterContent(data['content'], filter);
+      if (filter) {
+        data = this.webScrapingService.filterContent(data['content'], filter);
+      }
+
+      if (type) {
+        data = data
+          .filter(value => typeof value === type)
+          .map(value => (type === 'string' ? value.trim() : value))
+          .filter(value => !!value);
+      }
+
+      return {
+        jobRunID: id,
+        data,
+      };
+    } catch (error) {
+      console.error(error.message);
+      return {
+        jobRunID: id,
+        status: AdapterStatus.ERRORED,
+        error: 'Internal Server Error',
+      };
     }
-
-    if (type) {
-      data = data
-        .filter(value => typeof value === type)
-        .map(value => (type === 'string' ? value.trim() : value))
-        .filter(value => !!value);
-    }
-
-    return {
-      jobRunID: id,
-      data,
-    };
   }
 }

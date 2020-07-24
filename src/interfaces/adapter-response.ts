@@ -1,4 +1,10 @@
+export enum AdapterStatus {
+  ERRORED = 'errored',
+}
+
 export interface IAdapterResponse {
   jobRunID: string;
-  data: any;
+  data?: any;
+  status?: AdapterStatus;
+  error?: any;
 }

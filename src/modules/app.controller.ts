@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { IAdapterResponse, AdapterStatus } from '@interfaces/adapter-response';
+import { GetQueryDto } from './dto/get-query.dto';
 
 @Controller()
 export class AppController {
@@ -8,7 +9,7 @@ export class AppController {
 
   @Get()
   async get(
-    @Query() { id, url, path, filter, type }: any,
+    @Query() { id, url, path, filter, type }: GetQueryDto,
   ): Promise<IAdapterResponse> {
     try {
       let data = await this.appService.scrape(url, path);

@@ -6,7 +6,7 @@ This repository is a Chainlink external adapter to get data by web scraping.
 | Key      |               | Description | Value Example |
 |---------------|:-------------:|------------- |:---------|
 | `id`     | **Required**  | `jobRunID` back to the chainlink node | `1` |
-| `url`  | **Required**  | Specific website URL to scrapped. | `http://abehiroshi.la.coocan.jp/movie/eiga.htm` |
+| `url`  | **Required**  | Specific website URL to scrape. | `http://abehiroshi.la.coocan.jp/movie/eiga.htm` |
 | `path`  | **Required**  | Specific DOM tree to specify data. | `html.body.center.1.table` |
 | `filter` | *Optional* | Specific DOM tree to filter data. | `tr.td.strong.a` |
 | `type`  | *Optional*  | Specific data type to filter data | `string` | 

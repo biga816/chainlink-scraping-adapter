@@ -1,23 +1,23 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { WebScrapingService } from './web-scraping.service';
+import { AppService } from './app.service';
 import { IAdapterResponse, AdapterStatus } from '@interfaces/adapter-response';
 
-@Controller('web-scraping')
-export class WebScrapingController {
-  constructor(private readonly webScrapingService: WebScrapingService) {}
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   async get(
     @Query() { id, url, path, filter, type }: any,
   ): Promise<IAdapterResponse> {
     try {
-      let data = await this.webScrapingService.scrap(url, path);
+      let data = await this.appService.scrap(url, path);
 
-      if (filter) {
-        data = this.webScrapingService.filterContent(data['content'], filter);
+      if (filter && data) {
+        data = this.appService.filterContent(data['content'], filter);
       }
 
-      if (type) {
+      if (type && data) {
         data = data
           .filter(value => typeof value === type)
           .map(value => (type === 'string' ? value.trim() : value))
@@ -26,10 +26,10 @@ export class WebScrapingController {
 
       return {
         jobRunID: id,
-        data,
+        data: data || null,
       };
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
       return {
         jobRunID: id,
         status: AdapterStatus.ERRORED,

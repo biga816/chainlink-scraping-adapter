@@ -5,7 +5,7 @@ import { Iconv } from 'iconv';
 import got from 'got';
 
 @Injectable()
-export class WebScrapingService {
+export class AppService {
   async scrap(url: string, path: string): Promise<any[]> {
     const { body: data } = await got(url, {
       encoding: 'binary',

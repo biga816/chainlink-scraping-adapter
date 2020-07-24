@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class GetQueryDto {
   @IsString()
@@ -14,8 +14,10 @@ export class GetQueryDto {
   path: string;
 
   @IsString()
+  @IsOptional()
   filter: string;
 
   @IsString()
+  @IsOptional()
   type: string;
 }

@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsBoolean } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class GetQueryDto {
   @IsString()
@@ -17,7 +18,8 @@ export class GetQueryDto {
   @IsOptional()
   filter: string;
 
-  @IsString()
+  @IsBoolean()
   @IsOptional()
-  type: string;
+  @Transform(value => value?.toLowerCase() === 'true')
+  isRawData: boolean;
 }

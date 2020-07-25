@@ -9,20 +9,21 @@ export class AppController {
 
   @Get()
   async get(
-    @Query() { id, url, path, filter, type }: GetQueryDto,
+    @Query() { id, url, path, filter, isRawData }: GetQueryDto,
   ): Promise<IAdapterResponse> {
     try {
-      let data = await this.appService.scrape(url, path);
+      let data: any[] | string = await this.appService.scrape(url, path);
 
       if (filter && data) {
         data = this.appService.filterContent(data['content'], filter);
       }
 
-      if (type && data) {
+      if (!isRawData && data) {
         data = data
-          .filter(value => typeof value === type)
-          .map(value => (type === 'string' ? value.trim() : value))
-          .filter(value => !!value);
+          .filter(value => typeof value === 'string')
+          .map(value => value.trim())
+          .filter(value => !!value)
+          .join(',');
       }
 
       return {

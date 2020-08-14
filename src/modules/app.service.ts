@@ -3,6 +3,7 @@ import * as xmldom from 'xmldom';
 import { detect } from 'jschardet';
 import { Iconv } from 'iconv';
 import got from 'got';
+import { toHex, hexToBytes } from 'web3-utils';
 
 @Injectable()
 export class AppService {
@@ -33,6 +34,16 @@ export class AppService {
     } else {
       return filterdContents;
     }
+  }
+
+  convertToByte(data: any[]) {
+    const stringData = data
+      .filter(value => typeof value === 'string')
+      .map(value => value.trim())
+      .filter(value => !!value)
+      .join(',');
+
+    return hexToBytes(toHex(stringData));
   }
 
   private mapDOM(element: any, json?: any) {

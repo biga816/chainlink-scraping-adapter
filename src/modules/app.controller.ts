@@ -19,11 +19,7 @@ export class AppController {
       }
 
       if (!isRawData && data) {
-        data = data
-          .filter(value => typeof value === 'string')
-          .map(value => value.trim())
-          .filter(value => !!value)
-          .join(',');
+        data = this.appService.convertToByte(data);
       }
 
       return {

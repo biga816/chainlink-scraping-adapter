@@ -7,7 +7,7 @@ import {
   IsNumber,
   Min,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 
 export class Data {
   @IsString()
@@ -20,6 +20,7 @@ export class Data {
 
   @IsNumber()
   @IsNotEmpty()
+  @Transform(value => Number(value))
   @Min(0)
   index: number;
 

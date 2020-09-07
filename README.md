@@ -8,8 +8,9 @@ This repository is a Chainlink external adapter to get data by web scraping.
 | `id`     | **Required**  | `jobRunID` back to the chainlink node | `1` |
 | `url`  | **Required**  | Specific website URL to scrape. | `http://abehiroshi.la.coocan.jp/movie/eiga.htm` |
 | `path`  | **Required**  | Specific DOM tree to specify data. | `html.body.center.1.table` |
+| `index`  | **Required**  | Specific index number of scraped data. | `0` | 
 | `filter` | *Optional* | Specific DOM tree to filter data. | `tr.td.strong.a` |
-| `isRawData`  | *Optional*  | Boolean whether to get json DOM tree data | `false` | 
+
 
 
 ## Output Format
@@ -17,7 +18,7 @@ This repository is a Chainlink external adapter to get data by web scraping.
 ```json
 {
   "jobRunID": "1",
-  "data": "HOKUSAI,のみとり侍,祈りの幕が下りる時,北の桜守,空海―KU-KAI―,海辺のリア,恋妻家宮本,疾風ロンド,海よりもまだ深く,「エヴェレスト 神々の山嶺」,カラスの親指,麒麟の翼,チョコレート・ファイター,ジェネラル・ルージュの凱旋,青い鳥,チーム・バチスタの栄光,魍魎の匣,大帝の剣,「雨鱒の川」,「プラトニックセックス」"
+  "data": "HOKUSAI"
 }
 ```
 

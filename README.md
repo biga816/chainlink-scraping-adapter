@@ -25,6 +25,7 @@ This repository is a Chainlink external adapter to get data by web scraping.
 ## Installation
 
 ```bash
+$ nvm use
 $ npm install
 ```
 

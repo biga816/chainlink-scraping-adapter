@@ -2,14 +2,16 @@ import {
   IsString,
   IsNotEmpty,
   IsOptional,
-  ValidateNested,
-  IsObject,
   IsNumber,
   Min,
 } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
 
-export class Data {
+export class GetBodyDto {
+  @IsString()
+  @IsNotEmpty()
+  id: string;
+
   @IsString()
   @IsNotEmpty()
   url: string;
@@ -27,16 +29,4 @@ export class Data {
   @IsString()
   @IsOptional()
   filter: string;
-}
-
-export class GetBodyDto {
-  @IsString()
-  @IsNotEmpty()
-  id: string;
-
-  @IsNotEmpty()
-  @IsObject()
-  @ValidateNested()
-  @Type(() => Data)
-  data: Data;
 }

@@ -17,7 +17,7 @@ export class AppController {
 
   @Post()
   async post(
-    @Body() { id, data: { url, path, index, filter } }: GetBodyDto,
+    @Body() { id, url, path, index, filter }: GetBodyDto,
   ): Promise<IAdapterResponse> {
     return this.getResponseData(id, url, path, index, filter);
   }

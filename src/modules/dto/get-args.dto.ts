@@ -5,9 +5,9 @@ import {
   IsNumber,
   Min,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { Type, Transform } from 'class-transformer';
 
-export class GetQueryDto {
+export class GetArgsDto {
   @IsString()
   @IsNotEmpty()
   id: string;
@@ -21,7 +21,7 @@ export class GetQueryDto {
   path: string;
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   @Transform(value => Number(value))
   @Min(0)
   index: number;

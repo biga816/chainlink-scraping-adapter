@@ -89,7 +89,7 @@ export class AppService {
     const index = isNaN(elements[0] as any) ? 0 : Number(elements.shift());
     const targetContent = targetContents[index]?.['content'];
 
-    if (targetContent && targetContent.length && elements.length > 0) {
+    if (targetContent?.length && elements.length > 0) {
       return this.getTargetContent(targetContent, elements.join('.'));
     } else {
       return targetContents[index];
